@@ -286,12 +286,12 @@ likert.bar.plot <- function(l,
 		if(plot.percent.low) {
 			p <- p + geom_text(data=lsum, y=ymin, aes(x=Item, 
 					  			label=paste0(round(low), '%')), 
-					  			size=text.size, hjust=1, color=text.color)
+					  			size=text.size, hjust=1, color=low.color)
 		}
 		if(plot.percent.high) {
 			p <- p + geom_text(data=lsum, y=100, aes(x=Item,
 				  			label=paste0(round(high), '%')), 
-				  			size=text.size, hjust=-.2, color=text.color)
+				  			size=text.size, hjust=-.2, color=high.color)
 		}
 		if(plot.percent.neutral & l$nlevels %% 2 == 1 & include.center & !plot.percents) {
 			if(centered) {
