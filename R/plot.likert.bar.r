@@ -49,15 +49,17 @@ utils::globalVariables(c('value','Group','variable','low','Item','high',
 #' @seealso likert.bar.plot
 #' @seealso likert.density.plot
 likert.bar.plot <- function(l,
-							low.color='#D8B365',
-							high.color='#5AB4AC',
+							low.color='#FF8685',
+							high.color='#99F4A4',
 							neutral.color='grey90',
 							neutral.color.ramp='white',
 							colors=NULL,
+							plot.n=FALSE,
 							plot.percent.low=TRUE,
 							plot.percent.high=TRUE,
 							plot.percent.neutral=TRUE,
 							plot.percents=FALSE,
+							text.family=NULL,
 							text.size=3,
 							text.color='black',
 							centered=TRUE,
@@ -79,6 +81,8 @@ likert.bar.plot <- function(l,
 	ymin <- 0
 	ymax <- 100
 	ybuffer <- 5
+
+	warning(paste0('text.family is set to', text.family))
 	
 	lowrange <- 1 : floor(center - 0.5)
 	highrange <- ceiling(center + 0.5) : l$nlevels
@@ -163,13 +167,13 @@ likert.bar.plot <- function(l,
 		}
 		if(plot.percent.low) {
 			p <- p + geom_text(data=lsum, y=ymin, aes(x=Group, 
-	  						   label=paste0(round(low), '%'), group=Item), 
+	  						   label=paste0(round(low), '%'), group=Item, family=text.family), 
 			  				   size=text.size, hjust=1, color=text.color)
 		}
 		if(plot.percent.high) {
 			p <- p + geom_text(data=lsum, aes(x=Group, y=100, 
 							   label=paste0(round(high), '%'), 
-							   group=Item), size=text.size, hjust=-.2, color=text.color)			
+							   group=Item, family=text.family), size=text.size, hjust=-.2, color=text.color)			
 		}
 		if(plot.percent.neutral & l$nlevels %% 2 == 1 & include.center) {
 			if(centered) {
