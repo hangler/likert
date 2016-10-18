@@ -59,7 +59,7 @@ likert.bar.plot <- function(l,
 							plot.percent.high=TRUE,
 							plot.percent.neutral=TRUE,
 							plot.percents=FALSE,
-							text.family=NULL,
+							text.family='Helvetica',
 							text.size=3,
 							text.color='black',
 							centered=TRUE,
@@ -82,7 +82,7 @@ likert.bar.plot <- function(l,
 	ymax <- 100
 	ybuffer <- 5
 
-	warning(paste0('text.family is set to', text.family))
+	warning(paste0('text.family is set to ', text.family))
 	
 	lowrange <- 1 : floor(center - 0.5)
 	highrange <- ceiling(center + 0.5) : l$nlevels
@@ -178,12 +178,12 @@ likert.bar.plot <- function(l,
 		if(plot.percent.neutral & l$nlevels %% 2 == 1 & include.center) {
 			if(centered) {
 				p <- p + geom_text(data=lsum, y=0, aes(x=Group, group=Item,
-							  	   label=paste0(round(neutral), '%')),
+							  	   label=paste0(round(neutral), '%'), family=text.family),
 							       size=text.size, hjust=.5, color=text.color)
 			} else {
 				lsum$y <- lsum$low + (lsum$neutral/2)
 				p <- p + geom_text(data=lsum, aes(x=Group, y=y, group=Item,
-							  	   label=paste0(round(neutral), '%')),
+							  	   label=paste0(round(neutral), '%'), family=text.family),
 							       size=text.size, hjust=.5, color=text.color)				
 			}
 		}
